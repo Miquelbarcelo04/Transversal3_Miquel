@@ -1,5 +1,6 @@
 <template>
     <body>
+        <Header />
         <div class="cine">
             <h1>Selecciona el teu seient</h1>
             <div class="pantalla">

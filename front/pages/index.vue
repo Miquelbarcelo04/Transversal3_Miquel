@@ -1,8 +1,8 @@
 <template>
   <body>
+    <Header />
     <div class="home">
-      <button class="login-button">Login/Registro</button>
-      <h1>Benvinguts a Cinema Món</h1>
+      <h1>galaxia films</h1>
       <h2>Pel·licula del dia</h2>
       <div class="movie-list">
         <div v-if="dailyMovie" class="movie-card">
@@ -49,10 +49,14 @@ export default {
   
 <style scoped>
 body {
-  margin: 0; /* Elimina los márgenes predeterminados del body */
-  padding: 0; /* Elimina el padding predeterminado del body */
-  height: 100vh; /* Hace que el body ocupe el 100% del alto de la ventana */
-  overflow: hidden; /* Evita el desplazamiento vertical */
+  margin: 0;
+  /* Elimina los márgenes predeterminados del body */
+  padding: 0;
+  /* Elimina el padding predeterminado del body */
+  height: 100vh;
+  /* Hace que el body ocupe el 100% del alto de la ventana */
+  overflow: hidden;
+  /* Evita el desplazamiento vertical */
 }
 
 .home {
@@ -61,6 +65,12 @@ body {
   background-color: #1a1a1d;
   color: #c5c6c7;
   height: 100%;
+}
+
+h1 {
+  font-variant: small-caps;
+  font-size: 3rem;
+  font-family: 'Your Epic Font', sans-serif;
 }
 
 .movie-list {

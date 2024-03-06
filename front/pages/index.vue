@@ -1,21 +1,34 @@
 <template>
+
   <body>
     <Header />
     <div class="home">
       <h1>galaxia films</h1>
-      <h2>Pel·licula del dia</h2>
+      <h2>Pel·licula de la semana</h2>
+      <div class="movie-of-the-week">
+        <div class="movie-card">
+          <img :src="movieOfTheWeek.poster" alt="Pòster de la pel·lícula de la semana" />
+          <h2>{{ movieOfTheWeek.title }}</h2>
+          <p>{{ movieOfTheWeek.genre }}</p>
+          <p>{{ movieOfTheWeek.dia }}</p>
+          <button @click="bookTicket(movieOfTheWeek.id)">Reserva Entrada</button>
+        </div>
+      </div>
+      <h2>Todas las películas</h2>
       <div class="movie-list">
-        <div v-if="dailyMovie" class="movie-card">
-          <img :src="dailyMovie.poster" alt="Pòster de la pel·lícula" />
-          <h2>{{ dailyMovie.title }}</h2>
-          <p>{{ dailyMovie.genre }}</p>
-          <button @click="bookTicket(dailyMovie.id)">Reserva Entrada</button>
+        <div class="movie-card" v-for="movie in movies" :key="movie.id">
+          <img :src="movie.poster" :alt="`Póster de ${movie.title}`" />
+          <h2>{{ movie.title }}</h2>
+          <p>{{ movie.genre }}</p>
+          <p>{{ movie.dia }}</p>
+          <button @click="bookTicket(movie.id)">Reserva Entrada</button>
+          <nuxt-link :to="'compra/'+movie.id" class="buttonTicket">Reservar Entrada</nuxt-link>
         </div>
       </div>
     </div>
   </body>
 </template>
-  
+
 <script>
 export default {
   data() {
@@ -26,6 +39,42 @@ export default {
           title: "John Wick 4",
           genre: "Acció",
           poster: "/JohnWick4.jpg",
+          dia: "08/03/2024"
+        },
+        {
+          id: 2,
+          title: "Equalizador 3",
+          genre: "Acció",
+          poster: "/TheEqualizer3.jpg",
+          dia: "15/03/2024"
+        },
+        {
+          id: 3,
+          title: "Beekeeper",
+          genre: "Acció",
+          poster: "/Beekeeper.jpg",
+          dia: "22/03/2024"
+        },
+        {
+          id: 4,
+          title: "Ferrari vs Ford",
+          genre: "Acció",
+          poster: "/LeManse.jpg",
+          dia: "29/03/2024"
+        },
+        {
+          id: 5,
+          title: "Lamborhgini",
+          genre: "Acció",
+          poster: "/Lamborghini.jpg",
+          dia: "05/04/2024"
+        },
+        {
+          id: 6,
+          title: "Kill Bill ",
+          genre: "Acció",
+          poster: "/KillBill.jpg",
+          dia: "12/04/2024"
         },
         // Añade más películas aquí si lo deseas
       ],
@@ -33,9 +82,15 @@ export default {
     };
   },
   computed: {
-    dailyMovie() {
-      // Retorna una película basada en el día de la semana
-      return this.movies[this.today % this.movies.length];
+    movieOfTheWeek() {
+      const today = new Date();
+      let weekMovie = this.movies.find(movie => {
+        const movieDate = new Date(movie.dia);
+        const startOfWeek = today.getDate() - today.getDay();
+        const endOfWeek = startOfWeek + 7;
+        return movieDate >= new Date(today.setDate(startOfWeek)) && movieDate < new Date(today.setDate(endOfWeek));
+      });
+      return weekMovie || this.movies[0]; // Devuelve la primera película si ninguna coincide con la semana actual
     },
   },
   methods: {
@@ -46,17 +101,15 @@ export default {
   },
 };
 </script>
-  
+
 <style scoped>
 body {
   margin: 0;
   /* Elimina los márgenes predeterminados del body */
   padding: 0;
   /* Elimina el padding predeterminado del body */
-  height: 100vh;
+  height: 100%;
   /* Hace que el body ocupe el 100% del alto de la ventana */
-  overflow: hidden;
-  /* Evita el desplazamiento vertical */
 }
 
 .home {
@@ -74,8 +127,32 @@ h1 {
 }
 
 .movie-list {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+  padding: 20px;
+}
+
+@media screen and (max-width: 768px) {
+  .movie-list {
+    grid-template-columns: 1fr 1fr; /* 2 columnas para pantallas más pequeñas */
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .movie-list {
+    grid-template-columns: 1fr; /* 1 columna para pantallas muy pequeñas */
+  }
+}
+
+.movie-group {
   display: flex;
   justify-content: center;
+  flex: 1;
+  max-width: calc(300px * 3);
+  /* Ajusta este valor según el ancho de tus tarjetas */
+  margin: 0 auto;
+  /* Centra los grupos más pequeños */
 }
 
 .movie-card {
@@ -100,6 +177,12 @@ h1 {
   /* Ligero movimiento hacia arriba al pasar el mouse */
 }
 
+.movie-of-the-week {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
 .movie-card img {
   width: 100%;
   height: auto;
@@ -113,7 +196,7 @@ h1 {
   margin: 10px 0;
 }
 
-.movie-card button {
+.movie-card nuxt-link {
   display: block;
   width: 100%;
   padding: 10px 0;
@@ -127,7 +210,7 @@ h1 {
   /* Transición suave al cambiar el color */
 }
 
-.movie-card button:hover {
+.movie-card nuxt-link:hover {
   background-color: #45a29e;
   /* Color más oscuro al pasar el mouse */
 }
@@ -148,6 +231,5 @@ h1 {
 
 .login-button:hover {
   background-color: #45a29e;
-}</style>
-  
-  
+}
+</style>

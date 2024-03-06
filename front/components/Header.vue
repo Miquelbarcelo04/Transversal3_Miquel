@@ -51,6 +51,8 @@ h2 {
     border-radius: 5px;
     cursor: pointer;
     transition: background-color 0.3s;
+    font-family: 'Your Epic Font', sans-serif;
+    font-weight: bold;
 }
 
 .login-button:hover {

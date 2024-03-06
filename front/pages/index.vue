@@ -11,7 +11,7 @@
           <h2>{{ movieOfTheWeek.title }}</h2>
           <p>{{ movieOfTheWeek.genre }}</p>
           <p>{{ movieOfTheWeek.dia }}</p>
-          <button @click="bookTicket(movieOfTheWeek.id)">Reserva Entrada</button>
+          <nuxt-link :to="'compra/'+movieOfTheWeek.id" class="buttonTicket">Reservar Entrada</nuxt-link>
         </div>
       </div>
       <h2>Todas las películas</h2>
@@ -21,7 +21,6 @@
           <h2>{{ movie.title }}</h2>
           <p>{{ movie.genre }}</p>
           <p>{{ movie.dia }}</p>
-          <button @click="bookTicket(movie.id)">Reserva Entrada</button>
           <nuxt-link :to="'compra/'+movie.id" class="buttonTicket">Reservar Entrada</nuxt-link>
         </div>
       </div>
@@ -122,7 +121,7 @@ body {
 
 h1 {
   font-variant: small-caps;
-  font-size: 3rem;
+  font-size: 4rem;
   font-family: 'Your Epic Font', sans-serif;
 }
 
@@ -191,9 +190,39 @@ h1 {
   /* Espacio después del póster */
 }
 
+h2{
+  font-size: 2rem;
+  font-family: 'Your Epic Font', sans-serif;
+}
+
+p{
+  font-size: 1.2rem;
+  font-family: 'Your Epic Font', sans-serif;
+
+}
+
 .movie-card h2,
 .movie-card p {
   margin: 10px 0;
+}
+
+.buttonTicket {
+  display: inline-block;
+  width: 100%;
+  padding: 10px 0;
+  background-color: #66fcf1;
+  color: #0b0c10;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  text-decoration: none; /* Importante para quitar la subrayado del enlace */
+  font-weight: bold;
+  font-family: 'Your Epic Font', sans-serif;
+}
+
+.buttonTicket:hover {
+  background-color: #45a29e;
 }
 
 .movie-card nuxt-link {
@@ -215,21 +244,5 @@ h1 {
   /* Color más oscuro al pasar el mouse */
 }
 
-/* Estilos para el botón de login/registro */
-.login-button {
-  position: absolute;
-  top: 20px;
-  right: 20px;
-  padding: 10px 20px;
-  background-color: #66fcf1;
-  color: #0b0c10;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  transition: background-color 0.3s;
-}
 
-.login-button:hover {
-  background-color: #45a29e;
-}
 </style>

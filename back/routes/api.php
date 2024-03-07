@@ -3,6 +3,8 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PeliculasController;
+use App\Http\Controllers\EntradaController;
+use App\Http\Controllers\SesionesController;
 
 /*
 |--------------------------------------------------------------------------
@@ -18,6 +20,13 @@ use App\Http\Controllers\PeliculasController;
 Route::get('/peliculas', [PeliculasController::class, 'index']);
 Route::post('/peliculas', [PeliculasController::class, 'store']);
 Route::get('/peliculas/{id}', [PeliculasController::class, 'show']);
+
+// Route::get('/entradas/{id}', [EntradaController::class, 'show']);
+Route::post('/entradas', [EntradaController::class, 'store']);
+
+Route::get('/sesiones', [SesionesController::class, 'index']);
+Route::post('/sesiones', [SesionesController::class, 'store']);
+Route::get('/sesiones/{id}', [SesionesController::class, 'show']);
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();

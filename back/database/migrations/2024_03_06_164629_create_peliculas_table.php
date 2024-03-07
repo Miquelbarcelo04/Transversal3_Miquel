@@ -13,12 +13,12 @@ return new class extends Migration
     {
         Schema::create('peliculas', function (Blueprint $table) {
             $table->id();
-            $table->string('title');
+            $table->string('titol');
             $table->string('genere');
+            $table->string('descripcio');
             $table->string('poster');
-            $table->string('dia');
+            $table->integer('duracio');
             $table->string('imagen');
-            $table->json('butacasOcupadas')->nullable();
             $table->timestamps();
         });
     }

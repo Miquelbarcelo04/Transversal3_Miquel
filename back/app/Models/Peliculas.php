@@ -13,12 +13,12 @@ class Peliculas extends Model
 
     protected $fillable = [
         'id',
-        'title',
+        'titol',
         'genere',
+        'descripcio',
         'poster',
-        'dia',
+        'duracio',
         'imagen',
-        'butacasOcupadas',
     ];
 
     protected $casts = [

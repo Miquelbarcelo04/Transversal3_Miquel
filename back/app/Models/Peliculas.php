@@ -18,7 +18,6 @@ class Peliculas extends Model
         'descripcio',
         'poster',
         'duracio',
-        'imagen',
     ];
 
     protected $casts = [

@@ -17,8 +17,7 @@ return new class extends Migration
             $table->string('genere');
             $table->string('descripcio');
             $table->string('poster');
-            $table->integer('duracio');
-            $table->string('imagen');
+            $table->string('duracio');
             $table->timestamps();
         });
     }

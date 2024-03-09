@@ -17,11 +17,25 @@ class SesionController extends Controller
     }
 
     /**
-     * Store a newly created resource in storage.
-     */
+    * Store a newly created resource in storage.
+    */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'pelicula_id' => 'required|exists:peliculas,id',
+            'fecha' => 'required|date',
+            'dia_espectador' => 'required|boolean',
+            'VIP' => 'required|boolean',
+        ]);
+
+        $sesion = Sesion::create([
+            'pelicula_id' => $request->pelicula_id,
+            'fecha' => $request->fecha,
+            'dia_espectador' => $request->dia_espectador,
+            'VIP' => $request->VIP,
+        ]);
+
+        return response()->json($sesion, 201);
     }
 
     /**

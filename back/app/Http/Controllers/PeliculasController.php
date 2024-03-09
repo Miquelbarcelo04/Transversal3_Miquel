@@ -28,7 +28,6 @@ class PeliculasController extends Controller
             'descripcio' => 'required|string|max:255', 
             'poster' => 'nullable|string|max:255',
             'duracio' => 'required|string|max:255',
-            'imagen' => 'nullable|string|max:255',
         ]);
 
         // Crear nueva película

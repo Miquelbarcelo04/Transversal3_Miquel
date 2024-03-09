@@ -1,5 +1,4 @@
 <template>
-
   <body>
     <Header />
     <div class="home">
